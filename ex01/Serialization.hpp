@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Serialization.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 10:29:30 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/02/22 22:25:32 by anda-cun         ###   ########.fr       */
+/*   Created: 2024/02/22 10:27:55 by anda-cun          #+#    #+#             */
+/*   Updated: 2024/02/22 22:30:15 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-#include <iomanip>
+#ifndef SERIALIZATION_HPP
+#define SERIALIZATION_HPP
 
-int main(int ac, char **av)
+#include <iostream>
+
+class Serialization
 {
-    if (ac > 1)
-        ScalarConverter::convert(av[1]);
-    return (0);
-}
+    explicit Serialization();
+    Serialization(const Serialization &that);
+    Serialization &operator=(const Serialization &that);
+    ~Serialization();
+
+    public:
+    static void convert(std::string string_literal);
+};
+
+#endif

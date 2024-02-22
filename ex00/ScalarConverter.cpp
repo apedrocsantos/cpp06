@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:28:20 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/02/22 18:23:16 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:24:03 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,71 +37,60 @@ ScalarConverter::~ScalarConverter()
 void ScalarConverter::convert(std::string string)
 {
     size_t dot_pos;
-    size_t i = -1;
+    size_t j = -1;
     int dot = 0;
-    // char c;
-    // int i;
-    // float f;
-    // double d;
+    char c;
+    int i;
+    float f;
+    double d;
+    int a = -1;
+    std::string array[] = {"-inf", "-inff", "+inf", "+inff", "nan"};
 
-    if (string == "-inff" || string == "+inff")
+    while (++a < 5)
     {
-        std::cout << "char: impossible\n";
-        std::cout << "int: " << INT_MIN << "\n";
-        if (string == "-inff")
+        if (array[a] == string)
         {
-            std::cout << "float: -inff\n";
-            std::cout << "double: -inf\n";
+            std::cout << "char: impossible\n";
+            std::cout << "int: impossible\n";
+            if (string == "-inf" || string == "-inff")
+            {
+                std::cout << "float: -inff\n";
+                std::cout << "double: -inf\n";
+            }
+            if (string == "+inf" || string == "+inff")
+            {
+                std::cout << "float: +inff\n";
+                std::cout << "double: +inf\n";
+            }
+            if (string == "nan" || string == "nanf")
+            {
+                std::cout << "float: nanf\n";
+                std::cout << "double: nan\n";
+            }
+            return;
         }
-        else
-        {
-            std::cout << "float: inff\n";
-            std::cout << "double: inf\n";
-        }
-        return;
     }
-    if (string == "-inf" || string == "+inf")
+    while (string[++j])
     {
-        std::cout << "char: impossible\n";
-        std::cout << "int: " << INT_MAX << "\n";
-        if (string == "-inf")
-        {
-            std::cout << "float: -inff\n";
-            std::cout << "double: -inf\n";
-        }
-        else
-        {
-            std::cout << "float: inff\n";
-            std::cout << "double: inf\n";
-        }
-        return;
-    }
-    if (string == "nan" || string == "nanf")
-    {
-        std::cout << "char: impossible\n";
-        std::cout << "int: impossible\n";
-        std::cout << "float: nanf\n";
-        std::cout << "double: nan\n";
-        return;
-    }
-    while (string[++i])
-    {
-        if (!isdigit(string[i]))
+        if (!isdigit(string[j]))
         {
             dot_pos = string.find(".");
             if (dot_pos != std::string::npos && !dot)
                 dot = 1;
-            else if (string[i] == 'f' && !string[i + 1])
+            else if (string[j] == 'f' && !string[j + 1])
             {
-                // f = stof(string);
-                if (!isprint(static_cast<char>(stof(string))))
-                    std::cout << "char: Non displayable\n";
-                else
-                    std::cout << "char: " << static_cast<char>(stof(string)) << "\n";
-                std::cout << "int: " << static_cast<int>(stof(string)) << "\n";
-                std::cout << "float: " << stof(string) << "f\n";
-                std::cout << "double: " << static_cast<double>(stof(string)) << "\n";
-                return;// ("float");
+                try
+            {
+                f = stof(string); // float
+            }
+            catch(const std::out_of_range& e)
+            {
+                std::cerr << "Out of range\n";
+                return;
+            }
+                c = static_cast<char>(f);
+                i = static_cast<int>(stof(string));
+                d = static_cast<double>(stof(string));
             }
             else if (string.length() != 1)
             {
@@ -110,31 +99,55 @@ void ScalarConverter::convert(std::string string)
             }
             else
             {
-                std::cout << "char: " << string << "\n";
-                std::cout << "int: " << static_cast<int>(string[0]) << "\n";
-                std::cout << "float: " << static_cast<float>(string[0]) << "f\n";
-                std::cout << "double: " << static_cast<double>(string[0]) << "\n";
-                return;// ("char");
+                c = string[0]; // char
+                i = static_cast<int>(c);
+                f = static_cast<float>(c);
+                d = static_cast<double>(c);
             }
         }
     }
-    if (dot)
+    if (j == string.length() && dot)
     {
-        if (!isprint(static_cast<char>(stod(string))))
-            std::cout << "char: Non displayable\n";
-        else
-            std::cout << "char: " << static_cast<char>(stod(string)) << "\n";
-        std::cout << "int: " << static_cast<int>(stod(string)) << "\n";
-        std::cout << "float: " << static_cast<double>(stod(string)) << "f\n";
-        std::cout << "double: " << stod(string) << "\n";
-        return;// ("double");
+       try
+        {
+            d = stod(string); // double
+        }
+        catch(const std::out_of_range& e)
+        {
+            std::cerr << "Out of range\n";
+            return;
+        }
+        c = static_cast<char>(d);
+        i = static_cast<int>(d);
+        f = static_cast<float>(d);
     }
-    if (!isprint(static_cast<char>(stod(string))))
-            std::cout << "char: Non displayable\n";
-        else
-            std::cout << "char: " << static_cast<char>(stoi(string)) << "\n";
-    std::cout << "int: " << stoi(string) << "\n";
-    std::cout << "float: " << static_cast<double>(stoi(string)) << "f\n";
-    std::cout << "double: " << static_cast<double>(stoi(string)) << "\n";
-    return;// ("int");
+    else
+    {
+        try
+        {
+            i = stoi(string); // int
+        }
+        catch(const std::out_of_range& e)
+        {
+            std::cerr << "Out of range\n";
+            return;
+        }
+        c = static_cast<char>(i);
+        f = static_cast<float>(i);
+        d =  static_cast<double>(i);
+    }
+
+    if (!isprint(i))
+        std::cout << "char: Non displayable\n";
+    else
+        std::cout << "char: '" << c << "'\n";
+    std::cout << "int: " << i << "\n";
+    if (floor(i) == i && d >= -1000000 && d < 1000000)
+    {
+        std::cout << "float: " << f << ".0f\n";
+        std::cout << "double: " << d << ".0\n";
+        return;
+    }
+    std::cout << "float: " << f << "f\n";
+    std::cout << "double: " << d << "\n";
 }
