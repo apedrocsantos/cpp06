@@ -2,9 +2,9 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -Wno-conversion -std=c++98
 
-NAME = ex00
+NAME = convert
 
-FILES =	Bureaucrat
+FILES =	ScalarConverter
 
 SRCS =	$(FILES:=.cpp) main.cpp
 

@@ -14,7 +14,7 @@ int e = d; // Implicit demotion -> Hazardous
 int f = (int) d; // Explicit demotion -> OK
 ```
 
-Use the `--Wno-conversion` compiling flag when doing advanced calculations, prevents implicit cast when losing accuracy.
+Using the `--Wno-conversion` compiling flag when doing advanced calculations, prevents implicit cast when losing accuracy.
 
 ## Type Reinterpretation (Identity conversion)
 
@@ -55,14 +55,17 @@ class Parent{};
 class Child1 : public Parent {}
 class Child2 : public Parent {}
 
-Child1 a;
+int main()
+{
+    Child1 a;
 
-Parent *b = &a; // Implicit 'reinterpretation' cast
-Parent *c = (Parent *) &a; // Explicit 'reinterpretation' cast
+    Parent *b = &a; // Implicit 'reinterpretation' cast
+    Parent *c = (Parent *) &a; // Explicit 'reinterpretation' cast
 
-Parent *d = &a; // Implicit upcast -> Ok
-Child1 *e = d; // Implicit downcast -> Won't compile
-Child2 *f = (Child2 *) d; // Explicit downcast -> Compiles, but shouldn't be used (Child2 could be implemented differently than Child1)
+    Parent *d = &a; // Implicit upcast -> Ok
+    Child1 *e = d; // Implicit downcast -> Won't compile
+    Child2 *f = (Child2 *) d; // Explicit downcast -> Compiles, but shouldn't be used (Child2 could be implemented differently than Child1)
+}
 ```
 
 ## CPP Casts
@@ -85,13 +88,16 @@ class Child1 : public Parent {}
 class Child2 : public Parent {}
 class Unknown {}
 
-Child1 a;
+int main()
+{
+    Child1 a;
 
-Parent *b = &a; // Implicit upcast -> Ok
-Child1 *c = d; // Implicit downcast -> Won't compile
-Child2 *d = static_cast<Child2 *>(d); // Explicit downcast -> Compiles, but shouldn't be used (Child2 could be implemented differently than Child1)
+    Parent *b = &a; // Implicit upcast -> Ok
+    Child1 *c = d; // Implicit downcast -> Won't compile
+    Child2 *d = static_cast<Child2 *>(d); // Explicit downcast -> Compiles, but shouldn't be used (Child2 could be implemented differently than Child1)
 
 Unknown *e = static_cast<Unknown *>(b); // Won't compile
+}
 ```
 
 ### Dynamic Cast
@@ -114,25 +120,28 @@ class Parent {public: virtual ~Parent(){}}; //At least one member function must 
 class Child1 : public Parent {};
 class Child2 : public Parent {};
 
-Child1 a;
-Parent *b = &a;
-
-// Explicit downcast (pointer)
-Child1 *c = dynamic_cast<Child1 *> (b);
-if (c == NULL)
-// error
-else
-// OK
-
-// Explicit downcast (reference)
-try
+int main()
 {
-    Child2& d = dynamic_cast<Child 2&> (*b); // Child2 can't be NULL
-    std::cout << "conversion OK\n";
-}
-catch(std::bad_cast &bc)
-{
-    std::cout << bc.what();
+    Child1 a;
+    Parent *b = &a;
+
+    // Explicit downcast (pointer)
+    Child1 *c = dynamic_cast<Child1 *> (b);
+    if (c == NULL)
+    // error
+    else
+    // OK
+
+    // Explicit downcast (reference)
+    try
+    {
+        Child2& d = dynamic_cast<Child 2&> (*b); // Child2 can't be NULL
+        std::cout << "conversion OK\n";
+    }
+    catch(std::bad_cast &bc)
+    {
+        std::cout << bc.what();
+    }
 }
 ```
 
