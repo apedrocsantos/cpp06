@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 10:27:55 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/02/23 10:58:34 by anda-cun         ###   ########.fr       */
+/*   Created: 2024/02/23 11:09:47 by anda-cun          #+#    #+#             */
+/*   Updated: 2024/02/23 11:42:03 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-#define SCALARCONVERTER_HPP
+#include "Serialization.hpp"
+#include "data.hpp"
 
-#include <iostream>
-
-class ScalarConverter
+int main()
 {
-    ScalarConverter();
-    ScalarConverter(const ScalarConverter &that);
-    ScalarConverter &operator=(const ScalarConverter &that);
-    ~ScalarConverter();
+    Data data;
+    Data *new_data;
+    data.i = 135;
+    data.str = "Ola";
 
-    public:
-    static void convert(std::string string_literal);
-};
+    uintptr_t raw = Serialization::serialize(&data);
+    new_data = Serialization::deserialize(raw);
 
-#endif
+    std::cout << "i: " << new_data->i << ", str: " << new_data->str << "\n";
+}

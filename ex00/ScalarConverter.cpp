@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:28:20 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/02/22 22:24:03 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:01:25 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void ScalarConverter::convert(std::string string)
     else
         std::cout << "char: '" << c << "'\n";
     std::cout << "int: " << i << "\n";
-    if (floor(i) == i && d >= -1000000 && d < 1000000)
+    if (d == i && d >= -1000000 && d < 1000000)
     {
         std::cout << "float: " << f << ".0f\n";
         std::cout << "double: " << d << ".0\n";
@@ -150,4 +150,5 @@ void ScalarConverter::convert(std::string string)
     }
     std::cout << "float: " << f << "f\n";
     std::cout << "double: " << d << "\n";
+    return;
 }

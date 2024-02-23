@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wextra -Werror -Wno-conversion -std=c++98
 
 NAME = serialize
 
-FILES =	Serialization\
+FILES =	\
 
 SRCS =	$(FILES:=.cpp) main.cpp
 

@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:27:55 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/02/22 22:30:15 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:18:34 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 #define SERIALIZATION_HPP
 
 #include <iostream>
+#include "data.hpp"
 
 class Serialization
 {
-    explicit Serialization();
+    Serialization();
     Serialization(const Serialization &that);
     Serialization &operator=(const Serialization &that);
     ~Serialization();
 
     public:
-    static void convert(std::string string_literal);
+    static uintptr_t serialize(Data* ptr);
+    static Data* deserialize(uintptr_t raw);
 };
 
 #endif
