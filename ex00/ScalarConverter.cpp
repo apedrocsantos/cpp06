@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:28:20 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/02/23 11:01:25 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:11:53 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ void ScalarConverter::convert(std::string string)
             else if (string[j] == 'f' && !string[j + 1])
             {
                 try
-            {
-                f = stof(string); // float
-            }
-            catch(const std::out_of_range& e)
-            {
-                std::cerr << "Out of range\n";
-                return;
-            }
+                {
+                    f = stof(string); // float
+                }
+                catch(const std::out_of_range& e)
+                {
+                    std::cerr << "Out of range\n";
+                    return;
+                }
                 c = static_cast<char>(f);
                 i = static_cast<int>(stof(string));
                 d = static_cast<double>(stof(string));
