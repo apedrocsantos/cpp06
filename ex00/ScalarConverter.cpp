@@ -6,9 +6,11 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:28:20 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/03/07 14:11:53 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:44:27 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Casting operators in C++ - https://www.geeksforgeeks.org/casting-operators-in-cpp/
 
 #include "ScalarConverter.hpp"
 
@@ -77,20 +79,20 @@ void ScalarConverter::convert(std::string string)
             dot_pos = string.find(".");
             if (dot_pos != std::string::npos && !dot)
                 dot = 1;
-            else if (string[j] == 'f' && !string[j + 1])
+            else if (string.length() > 1 && !string[j + 1] && string[j] == 'f')
             {
                 try
                 {
                     f = stof(string); // float
                 }
-                catch(const std::out_of_range& e)
+                catch(const std::exception& e)
                 {
-                    std::cerr << "Out of range\n";
+                    std::cerr << "Invalid value\n";
                     return;
                 }
                 c = static_cast<char>(f);
-                i = static_cast<int>(stof(string));
-                d = static_cast<double>(stof(string));
+                i = static_cast<int>(f);
+                d = static_cast<double>(f);
             }
             else if (string.length() != 1)
             {
@@ -121,7 +123,7 @@ void ScalarConverter::convert(std::string string)
         i = static_cast<int>(d);
         f = static_cast<float>(d);
     }
-    else
+    else if (string.compare("f"))
     {
         try
         {

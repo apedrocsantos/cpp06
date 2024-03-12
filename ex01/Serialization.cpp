@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:18:00 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/03/07 15:58:17 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:49:59 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ Serialization::~Serialization()
 
 }
 
-void * Serialization::serialize(Data* ptr)
+uintptr_t Serialization::serialize(Data * ptr)
 {
-    return (reinterpret_cast<void *>(ptr));
+    return (reinterpret_cast<uintptr_t>(ptr));
 }
 
-Data* Serialization::deserialize(void * raw)
+Data * Serialization::deserialize(uintptr_t raw)
 {
     return (reinterpret_cast<Data *>(raw));
 }

@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:46:24 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/02/23 12:56:06 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:55:21 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Base *generate(void)
             return new B;
         case 2:
         std::cout << "Created C class\n";
-        return new B;
+        return new C;
     }
     std::cout << "Created D class\n";
     return new D;
@@ -36,6 +36,7 @@ Base *generate(void)
 
 void identify(Base* p)
 {
+    std::cout << "Identifying a pointer: ";
     if (dynamic_cast<A *>(p))
         std::cout << "Type A\n";
     else if (dynamic_cast<B *>(p))
@@ -48,6 +49,7 @@ void identify(Base* p)
 
 void identify(Base& p)
 {
+    std::cout << "Identifying a reference: ";
     Base p2;
     try
     {
@@ -66,7 +68,7 @@ void identify(Base& p)
             try
             {
                 p2 = dynamic_cast<C &>(p);
-                std::cout << "Tape C\n";
+                std::cout << "Type C\n";
             }
             catch(...)
             {

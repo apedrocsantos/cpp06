@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:09:47 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/03/07 15:58:49 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:47:04 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ int main()
     data.i = 135;
     data.str = "Ola";
 
-    void * raw = Serialization::serialize(&data);
+    uintptr_t raw = Serialization::serialize(&data);
     new_data = Serialization::deserialize(raw);
 
     std::cout << "i: " << new_data->i << ", str: " << new_data->str << "\n";
+    std::cout << &raw << std::endl;
+    std::cout << "data: " << &data << "\tdata.i: " << &data.i << "\tdata.str: " << &data.str << "\n";
+    std::cout << "new_data: " << new_data << "\tnew_data->i: " << &new_data->i << "\tnew_data->str: " << &new_data->str << "\n";
 }

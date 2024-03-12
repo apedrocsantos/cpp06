@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:27:55 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/03/07 15:58:29 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:27:01 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class Serialization
     ~Serialization();
 
     public:
-    static void * serialize(Data* ptr);
-    static Data* deserialize(void * raw);
+    static uintptr_t serialize(Data* ptr);
+    static Data* deserialize(uintptr_t raw);
 };
 
 #endif
