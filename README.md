@@ -68,7 +68,7 @@ int main()
 }
 ```
 
-## CPP Casts
+## [CPP Casts](https://www.learncpp.com/cpp-tutorial/explicit-type-conversion-casting-and-static-cast/)
 
 ### Static Cast
 
@@ -102,13 +102,13 @@ Unknown *e = static_cast<Unknown *>(b); // Won't compile
 
 ### Dynamic Cast
 
-Dynamic Cast only happens at runtime, while all other casts are done during compilation. Program may compile but the dynamic cast may file at runtime, which means the Dynamic Cast should be handled properly (error checking).
+Dynamic Cast only happens at runtime, while all other casts are done during compilation. Program may compile but the dynamic cast may fail at runtime, which means the Dynamic Cast should be handled properly (error checking).
 
 Dynamic Cast only works with polymorphic instances (sub-type polymorphisms), meaning at least one the member functions has to be virtual (to allow for dynamic cast).
 
 Dynamic cast is used only for down cast, and checks if the cast is possible.
 
-Dynamic cast only work pointer and reference casts. The behaviour is different for each.
+Dynamic cast only works for pointer and reference casts. The behaviour is different for each.
 
 Dynamic cast returns either the converted address or NULL when the cast of a pointer is impossible. If casting a reference, one should use try/catch.
 
