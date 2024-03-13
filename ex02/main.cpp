@@ -6,7 +6,7 @@
 /*   By: anda-cun <anda-cun@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:46:24 by anda-cun          #+#    #+#             */
-/*   Updated: 2024/03/13 10:13:24 by anda-cun         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:35:08 by anda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ Dynamic cast, used in polymorphic instances (see nb 5) - https://en.cppreference
 #include <iostream>
 #include <cstdlib>
 #include <iostream>
-#include <typeinfo>
 
 Base *generate(void)
 {
@@ -63,21 +62,21 @@ void identify(Base& p)
         p2 = dynamic_cast<A &>(p);
         std::cout << "Type A\n";
     }
-    catch(std::bad_cast &e)
+    catch(std::exception &e)
     {
         try
         {
             p2 = dynamic_cast<B &>(p);
             std::cout << "Type B\n";
         }
-        catch(std::bad_cast &e)
+        catch(std::exception &e)
         {
             try
             {
                 p2 = dynamic_cast<C &>(p);
                 std::cout << "Type C\n";
             }
-            catch(std::bad_cast &e)
+            catch(std::exception &e)
             {
                 std::cout << "Couldn't find type\n";
             }
